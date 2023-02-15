@@ -1,0 +1,9 @@
+version: "2.2"
+services:
+   spotifyd:
+    container_name: spotifyd
+    image: gallows/spotifyd:0.3.4
+    volumes:
+      -  /var/lib/docker/data/spotifyd/spotifyd.conf:/etc/spotifyd.conf:ro
+    devices:
+       - /dev/snd
