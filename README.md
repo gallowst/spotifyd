@@ -1,5 +1,7 @@
 # Spotifyd Docker Image based on Alpine Linux
 
+[![Build Status](https://dev.azure.com/gallowst/docker/_apis/build/status/gallowst.spotifyd?branchName=main)](https://dev.azure.com/gallowst/docker/_build/latest?definitionId=29&branchName=main)
+
  - Heavily based on [this](https://hub.docker.com/r/rohmilkaese/spotifyd) docker image but as that hadn't been updated for a while I decided to copy the code and roll my own container
  - Allows me to run `spotifyd` in a lightweight container and stream spotify to the speaker attached to my Docker host 
 - [Spotifyd](https://github.com/Spotifyd/spotifyd) supports the Spotify Connect protocol, which makes it show up as a device that can be controlled from the official clients.
