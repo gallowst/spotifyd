@@ -1,4 +1,4 @@
-FROM alpine:3.17.2 AS build
+FROM alpine:3.17.3 AS build
 RUN apk -U --no-cache add \
 		git \
 		build-base \
@@ -21,7 +21,7 @@ RUN apk -U --no-cache add \
 	&& cargo build --release \
 	&& apk del build-base rust rustup cargo
 
-FROM alpine:3.17.2
+FROM alpine:3.17.3
 RUN apk -U --no-cache add \
 		libtool \
 		libconfig-dev \
