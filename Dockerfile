@@ -1,4 +1,4 @@
-FROM alpine:3.17.3 AS build
+FROM alpine:3.18.0 AS build
 RUN apk -U --no-cache add \
 		git \
 		build-base \
@@ -17,21 +17,25 @@ RUN apk -U --no-cache add \
 		cargo \
 	&& cd /root \
 	&& git clone https://github.com/Spotifyd/spotifyd . \
-	&& git checkout tags/v0.3.4 \
+	&& git checkout tags/v0.3.5 \
 	&& cargo build --release \
 	&& apk del build-base rust rustup cargo
 
-FROM alpine:3.17.3
+FROM alpine:3.18.0
 RUN apk -U --no-cache add \
 		libtool \
 		libconfig-dev \
-		alsa-lib \
 		avahi \
 		dbus \
+        alsa-utils \
+        alsa-utils-doc \
+        alsa-lib \
+        alsaconf \
+        alsa-ucm-conf \
 	&& addgroup -S spotifyd \
 	&& adduser -S -G spotifyd spotifyd
 COPY --from=build /root/target/release/spotifyd /usr/bin/spotifyd
 ADD start.sh /
 RUN chmod +x /start.sh
-USER spotifyd
+#USER spotifyd
 CMD [ "sh","/start.sh" ]
