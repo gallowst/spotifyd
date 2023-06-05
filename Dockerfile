@@ -15,11 +15,14 @@ RUN apk -U --no-cache add \
 		rust \
 		rustup \
 		cargo \
-	&& cd /root \
-	&& git clone https://github.com/Spotifyd/spotifyd . \
-	&& git checkout tags/v0.3.5 \
-	&& cargo build --release \
-	&& apk del build-base rust rustup cargo
+		pulseaudio \
+		pulseaudio-alsa \
+		pulsemixer \
+		&& cd /root \
+		&& git clone https://github.com/Spotifyd/spotifyd . \
+		&& git checkout tags/v0.3.5 \
+		&& cargo build --release \
+		&& apk del build-base rust rustup cargo
 
 FROM alpine:3.18.0
 RUN apk -U --no-cache add \
@@ -27,13 +30,13 @@ RUN apk -U --no-cache add \
 		libconfig-dev \
 		avahi \
 		dbus \
-        alsa-utils \
-        alsa-utils-doc \
-        alsa-lib \
-        alsaconf \
-        alsa-ucm-conf \
-	&& addgroup -S spotifyd \
-	&& adduser -S -G spotifyd spotifyd
+		alsa-utils \
+		alsa-utils-doc \
+		alsa-lib \
+		alsaconf \
+		alsa-ucm-conf \
+		&& addgroup -S spotifyd \
+		&& adduser -S -G spotifyd spotifyd
 COPY --from=build /root/target/release/spotifyd /usr/bin/spotifyd
 ADD start.sh /
 RUN chmod +x /start.sh
