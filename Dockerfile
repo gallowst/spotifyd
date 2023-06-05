@@ -15,9 +15,6 @@ RUN apk -U --no-cache add \
 		rust \
 		rustup \
 		cargo \
-		pulseaudio \
-		pulseaudio-alsa \
-		pulsemixer \
 		&& cd /root \
 		&& git clone https://github.com/Spotifyd/spotifyd . \
 		&& git checkout tags/v0.3.5 \
@@ -35,6 +32,9 @@ RUN apk -U --no-cache add \
 		alsa-lib \
 		alsaconf \
 		alsa-ucm-conf \
+		pulseaudio \
+		pulseaudio-alsa \
+		pulsemixer \
 		&& addgroup -S spotifyd \
 		&& adduser -S -G spotifyd spotifyd
 COPY --from=build /root/target/release/spotifyd /usr/bin/spotifyd
