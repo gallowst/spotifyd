@@ -9,7 +9,7 @@
 ## Docker Command Line
 
 ~~~bash
-docker run -it --rm --device /dev/snd -v $(pwd)/spotifyd.conf:/etc/spotifyd.conf gallows/spotifyd:0.3.4
+docker run -it --rm --device /dev/snd -v $(pwd)/spotifyd.conf:/etc/spotifyd.conf gallows/spotifyd:latest
 ~~~
 
 - Assumes that there is a valid spotifyd.conf file in the current working directory
@@ -17,15 +17,25 @@ docker run -it --rm --device /dev/snd -v $(pwd)/spotifyd.conf:/etc/spotifyd.conf
 ## Docker Compose
 
 ~~~yaml
-version: "2.2"
+version: "3.7"
 services:
-   spotifyd:
+  spotifyd:
     container_name: spotifyd
+    deploy:
+      resources:
+        limits:
+          memory: 64M
+        reservations:
+          memory: 8M
     image: gallows/spotifyd:latest
+    network_mode: host
+    restart: "always"
+    group_add:
+      - '29' # audio group
     volumes:
-       - ./conf/spotifyd.conf:/etc/spotifyd.conf:ro
+      - ./spotifyd.conf:/etc/spotifyd.conf:ro
     devices:
-       - /dev/snd
+     - /dev/snd
 ~~~
 
 ## Spodifyd Config File
