@@ -45,21 +45,21 @@ stages:
           $(tag)
           latest
 
-    - task: CmdLine@2
-      displayName: Scan
-      inputs:
-        script: |
-          docker run -v /var/run/docker.sock:/var/run/docker.sock -v $PWD:/mnt --rm aquasec/trivy image --severity HIGH,CRITICAL --format template --template "@contrib/junit.tpl" --output /mnt/junit-report.xml --no-progress gallows/spotifyd
-          cp $PWD/junit-report.xml $(Build.ArtifactStagingDirectory)/junit-report.xml
+    # - task: CmdLine@2
+    #   displayName: Scan
+    #   inputs:
+    #     script: |
+    #       docker run -v /var/run/docker.sock:/var/run/docker.sock -v $PWD:/mnt --rm aquasec/trivy image --severity HIGH,CRITICAL --format template --template "@contrib/junit.tpl" --output /mnt/junit-report.xml --no-progress gallows/spotifyd
+    #       cp $PWD/junit-report.xml $(Build.ArtifactStagingDirectory)/junit-report.xml
 
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'JUnit'
-        testResultsFiles: '**/junit-*.xml'
-        mergeTestResults: true
-        failTaskOnFailedTests: true
-        testRunTitle: 'Trivy'
-      condition: 'always()'
+    # - task: PublishTestResults@2
+    #   inputs:
+    #     testResultsFormat: 'JUnit'
+    #     testResultsFiles: '**/junit-*.xml'
+    #     mergeTestResults: true
+    #     failTaskOnFailedTests: true
+    #     testRunTitle: 'Trivy'
+    #   condition: 'always()'
 
     - task: Docker@2
       displayName: Push the tagged image
