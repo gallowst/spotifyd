@@ -40,5 +40,5 @@ RUN apk -U --no-cache add \
 COPY --from=build /root/target/release/spotifyd /usr/bin/spotifyd
 ADD start.sh /
 RUN chmod +x /start.sh
-#USER spotifyd
+USER spotifyd
 CMD [ "sh","/start.sh" ]
