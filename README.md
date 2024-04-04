@@ -38,7 +38,7 @@ services:
      - /dev/snd
 ~~~
 
-## Spodifyd Config File
+## Spotifyd Config File
 
 ~~~bash
 username = ""
