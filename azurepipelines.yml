@@ -15,7 +15,7 @@ resources:
 variables:
   tag: '$(Build.BuildId)'
   imageName: 'gallows/spotifyd'
-  trivyVersion: '0.50.4'
+  trivyVersion: '0.54.1'
 
 stages:
 - stage: Build
