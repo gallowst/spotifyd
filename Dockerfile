@@ -5,7 +5,7 @@ WORKDIR /usr/src/
 RUN apt-get update && apt-get install -y \
         ca-certificates \
         curl \
-        libasound2t64-dev \
+        libasound2-dev \
         libssl-dev \
         libpulse-dev \
         libdbus-1-dev \
