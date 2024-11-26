@@ -27,7 +27,7 @@ LABEL maintainer "gallows <gallowst@gallows.pw>"
 # Install Spotifyd dependencies
 RUN apt-get update && apt-get -y install \
         libpulse0 \
-        libasound2 \
+        libasound2t64 \
         --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
