@@ -1,4 +1,4 @@
-FROM rust:1.79.0-slim as build
+FROM rust:bookworm as build
 
 WORKDIR /usr/src/
 
